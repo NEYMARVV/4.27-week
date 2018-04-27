@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="format-detection" content="telphone=no, email=no,address=no" >
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="js/swiper-3.4.2.min.css">
+</head>
+<body>
+    <div class="wrap">
+        <header id="header" class="header">
+            <a class="inp" href="html/inp.html" title="">
+                <input type="tel" name="" value="" placeholder="小米 MIX 2s">
+            </a>
+            <i class="icon iconfont">&#xe60e;</i>
+        </header><!-- /header -->
+        <section class="section content">
+            <div class="ban swiper-container">
+                <div class="hua swiper-wrapper">
+                    <div class="kuai swiper-slide">
+                        <img src="img/1.jpg" alt="">
+                    </div>
+                    <div class="kuai swiper-slide">
+                        <img src="img/2.jpg" alt="">
+                    </div>
+                    <div class="kuai swiper-slide">
+                        <img src="img/3.jpg" alt="">
+                    </div>
+                    <div class="kuai swiper-slide">
+                        <img src="img/4.jpg" alt="">
+                    </div>
+                    <div class="kuai swiper-slide">
+                        <img src="img/5.jpg" alt="">
+                    </div>
+                </div>
+                <div class="dian swiper-pagination"></div>
+            </div>
+            <div class="ico-cont">
+                <a href="" title="">
+                    <i class="icon iconfont">&#xe6a1;</i>
+                    <span>活动频道</span>
+                </a>
+                <a href="" title="">
+                    <i class="icon iconfont" style="color:red">&#xe6a1;</i>
+                    <span>活动频道</span>
+                </a>
+                <a href="" title="">
+                    <i class="icon iconfont" style="color:yellow">&#xe6a1;</i>
+                    <span>活动频道</span>
+                </a>
+                <a href="" title="">
+                    <i class="icon iconfont" style="color:skyblue">&#xe6a1;</i>
+                    <span>活动频道</span>
+                </a>
+            </div>
+            <div class="tit">
+                <dl class="dl">
+                    <dt><img src="img/1.jpg" alt=""></dt>
+                    <dd>
+                        <p>小米之家五彩城</p>
+                        <span>距离3.9公里</span>
+                    </dd>
+                </dl>
+                <div class="or">
+                    <span>其它零售店></span>
+                </div>
+            </div>
+            <div class="img-con">
+                <img src="img/1.png" alt="">
+            </div>
+            <h1 class="tit-h1">商城早报</h1>
+            <div class="tit-img">
+                <!-- <img src="img/2.png" alt="">
+                <img src="img/3.png" alt="">
+                <img src="img/4.png" alt="">
+                <img src="img/2.png" alt=""> -->
+            </div>
+        </section>
+        <section class="section remo">2</section>
+        <section class="section remo">3</section>
+        <section class="section remo">4</section>
+        <footer class="foot">
+            <a href="#" title="">
+                <i class="icon iconfont">&#xe648;</i>
+                <span>首页</span>
+            </a>
+            <a href="#" title="">
+                <i class="icon iconfont">&#xe614;</i>
+                <span>分类</span>
+            </a>
+            <a href="#" title="">
+                <i class="icon iconfont">&#xe63c;</i>
+                <span>购物车</span>
+            </a>
+            <a href="#" title="">
+                <i class="icon iconfont">&#xe647;</i>
+                <span>我的</span>
+            </a>
+        </footer>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/swiper-3.4.2.min.js"></script>
+    <script type="text/x-handlebars-template" id="img-xuan">
+        {{#each this}}
+            <img src="{{img}}" alt="">
+        {{/each}}
+    </script>
+    <script>
+        new Swiper('.ban',{
+            pagination:'.dian',
+            autoplay:3000,
+            loop:true
+        })
+
+        $.ajax({
+            url:'/login',
+            success:function(data){
+                console.log(data)
+                var t = $('#img-xuan').html();
+                var template = Handlebars.compile(t);
+                var html = template(data);
+                $('.tit-img').html(html);
+            }
+        })
+
+        $('.foot').on('click','a',function(){
+            var ind = $(this).index()
+            // alert($(this).index())
+            $('.section').eq(ind).addClass('add').siblings(".section").removeClass('add')
+            $('.section').eq(ind).removeClass('remo').siblings(".section").addClass('remo')
+        })
+    </script>
+</body>
+</html>
